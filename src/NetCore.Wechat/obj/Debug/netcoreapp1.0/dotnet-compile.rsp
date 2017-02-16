@@ -1,5 +1,5 @@
---temp-output:F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\obj\Debug\netcoreapp1.0\
---out:F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\bin\Debug\netcoreapp1.0\NetCore.Wechat.dll
+--temp-output:F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\obj\Debug\netcoreapp1.0\
+--out:F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\bin\Debug\netcoreapp1.0\NetCore.Wechat.dll
 --define:DEBUG
 --define:TRACE
 --define:NETCOREAPP1_0
@@ -198,8 +198,11 @@
 --reference:C:\Users\John\.nuget\packages\System.Threading.Timer\4.3.0\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\John\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\John\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
---resource:"F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\obj\Debug\netcoreapp1.0\NetCore.Wechatdotnet-compile.deps.json",NetCore.Wechat.deps.json
-F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\Program.cs
-F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\Startup.cs
-F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\Controllers\TestWechatController.cs
-F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\Models\WechatModel.cs
+--resource:"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\obj\Debug\netcoreapp1.0\NetCore.Wechatdotnet-compile.deps.json",NetCore.Wechat.deps.json
+F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Program.cs
+F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Startup.cs
+F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Controllers\MenuController.cs
+F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Controllers\TestWechatController.cs
+F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Models\UseWkMvcDI.cs
+F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Models\WechatHelper.cs
+F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Models\WechatModel.cs

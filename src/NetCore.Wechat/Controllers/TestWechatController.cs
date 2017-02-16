@@ -18,58 +18,30 @@ namespace NetCore.Wechat.Controllers
     public class TestWechatController : Controller
     {
         private IMemoryCache _memoryCache;
-        WechatModel config;
-      
-        public TestWechatController(IOptions<WechatModel> option, IMemoryCache memoryCache)
+        private IOptions<WechatModel> option;
+
+        public TestWechatController(IOptions<WechatModel> options, IMemoryCache memoryCache)
         {
-            config = option.Value;
+            option = options;
             _memoryCache = memoryCache;
         }
 
+      
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View(config);
+            return View(option.Value);
         }
 
         [HttpPost]
         public IActionResult Index(WechatModel model)
         {
-            ViewBag.acctoken=GetAccess_Token(model.AppId, model.AppSecret);
+            ViewBag.acctoken = new WechatHelper(option, _memoryCache).GetAccess_Token(model.AppId, model.AppSecret);
             return View();
         }
 
 
-        /// <summary>
-        /// 获取令牌
-        /// </summary>
-        public string GetAccess_Token(string AppId, string AppSecret)
-        {
-            string cacheKey = "access_token";
-            string result;
-            if (!_memoryCache.TryGetValue(cacheKey, out result))
-            {
-                string url = string.Format("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}", AppId, AppSecret);
-                HttpClient httpClient = new HttpClient();
-                var t = httpClient.GetStringAsync(url);
-                t.Wait();
-                result = t.Result;
-
-                //解析json
-                Hashtable ht = JsonConvert.DeserializeObject<Hashtable>(result);
-                string acctoken = ht["access_token"].ToString();
-               
-                _memoryCache.Set(cacheKey, acctoken, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(7000)));
-
-                return acctoken;
-            }
-            else
-            {
-                return _memoryCache.Get<string>("access_token");
-            }           
-
-        }
     }
 }
 

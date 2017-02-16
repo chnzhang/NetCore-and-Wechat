@@ -12,6 +12,7 @@ namespace NetCore.Wechat.Models
        public string AppId { get; set; }
        public string AppSecret { get; set; }
        public string access_token { get; set; }
-
+       public DateTime createtime { get; set; }
+       public int ExportTime { get; set; }
     }
 }

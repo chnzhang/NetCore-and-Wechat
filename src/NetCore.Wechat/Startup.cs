@@ -71,6 +71,8 @@ namespace NetCore.Wechat
 
             app.UseStaticFiles();
 
+            app.UseWkMvcDI();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

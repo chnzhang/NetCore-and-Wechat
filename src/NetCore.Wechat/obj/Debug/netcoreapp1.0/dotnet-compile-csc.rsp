@@ -7,8 +7,8 @@
 -debug:full
 -nostdlib
 -nologo
-"F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
--out:"F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\bin\Debug\netcoreapp1.0\NetCore.Wechat.dll"
+"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
+-out:"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\bin\Debug\netcoreapp1.0\NetCore.Wechat.dll"
 -r:"C:\Users\John\.nuget\packages\Microsoft.ApplicationInsights\2.1.0\lib\dotnet5.4\Microsoft.ApplicationInsights.dll"
 -r:"C:\Users\John\.nuget\packages\Microsoft.ApplicationInsights.AspNetCore\1.0.0\lib\netstandard1.6\Microsoft.ApplicationInsights.AspNetCore.dll"
 -r:"C:\Users\John\.nuget\packages\Microsoft.AspNetCore.Antiforgery\1.0.1\lib\netstandard1.3\Microsoft.AspNetCore.Antiforgery.dll"
@@ -194,8 +194,11 @@
 -r:"C:\Users\John\.nuget\packages\System.Threading.Timer\4.3.0\ref\netstandard1.2\System.Threading.Timer.dll"
 -r:"C:\Users\John\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\John\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll"
--resource:"F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\obj\Debug\netcoreapp1.0\NetCore.Wechatdotnet-compile.deps.json",NetCore.Wechat.deps.json
-"F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\Program.cs"
-"F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\Startup.cs"
-"F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\Controllers\TestWechatController.cs"
-"F:\job\Github-NetCoreWechat\NetCore.Wechat\src\NetCore.Wechat\Models\WechatModel.cs"
+-resource:"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\obj\Debug\netcoreapp1.0\NetCore.Wechatdotnet-compile.deps.json",NetCore.Wechat.deps.json
+"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Program.cs"
+"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Startup.cs"
+"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Controllers\MenuController.cs"
+"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Controllers\TestWechatController.cs"
+"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Models\UseWkMvcDI.cs"
+"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Models\WechatHelper.cs"
+"F:\gitup\project\NetCore-and-Wechat\src\NetCore.Wechat\Models\WechatModel.cs"

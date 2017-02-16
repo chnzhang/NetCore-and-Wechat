@@ -18,9 +18,13 @@
 <body>
     <form action="/TestWechat/Index" method="post">
        <span> AppID：</span>@Html.TextBoxFor(x=>x.AppId)<br />
-        <span>AppSecret：</span>@Html.TextBoxFor(x=>x.AppSecret)<br />
+        <span>AppSecret：</span>@Html.TextBoxFor(x=>x.AppSecret)<br /><br />
         <input type="submit" />
     </form>
-  获取到的acctoken:  @ViewBag.acctoken
+  获取到的acctoken:  @ViewBag.acctoken<br /><br />
+    <a href="/Menu" target="_blank">连接下一页面</a>
+
+    <br /><br /><br />
+    注意：微信请求令牌每日只有200次机会 故：程序做了access_token 内存缓存+文件缓存 以确保不会丢失令牌
 </body>
 </html>
