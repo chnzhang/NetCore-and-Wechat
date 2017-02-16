@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model NetCore.Wechat.Models.WechatModel
+<html>
+<head>
+    <title>测试接口连接情况</title>
+    <style>
+        form span {
+            width:100px;
+            display:inline-block;
+            margin-top:8px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/TestWechat/Index" method="post">
+       <span> AppID：</span>@Html.TextBoxFor(x=>x.AppId)<br />
+        <span>AppSecret：</span>@Html.TextBoxFor(x=>x.AppSecret)<br />
+        <input type="submit" />
+    </form>
+  获取到的acctoken:  @ViewBag.acctoken
+</body>
+</html>
