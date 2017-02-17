@@ -3,4 +3,39 @@
 *@
 @{
 }
- 获取到的acctoken:  @ViewBag.acctoken
+<html>
+
+<head>
+    <title>菜单</title>    
+    <script type="text/javascript" src="~/Scripts/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+    获取到的acctoken:  @ViewBag.acctoken<br />
+    <br />
+    <input type="button" value="设置菜单" name="setmenu" id="setMenu" />
+</body>
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#setMenu").click(function(){
+
+            $.post("/Menu/SetWechatMenu", {}, function (result) {
+
+                if (result) {
+                    alert("设置成功！");
+                } else {
+
+                    alert("设置失败！");
+                }
+
+             });
+
+        });
+
+    });
+</script>
+</html>
+
+
+

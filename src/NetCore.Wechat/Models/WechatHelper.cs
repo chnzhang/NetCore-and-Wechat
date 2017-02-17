@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace NetCore.Wechat.Models
@@ -28,7 +29,7 @@ namespace NetCore.Wechat.Models
         /// <summary>
         /// 缓存对象
         /// </summary>
-        private IMemoryCache _memoryCache=DI.ServiceProvider.GetRequiredService<IMemoryCache>();
+        private IMemoryCache _memoryCache = DI.ServiceProvider.GetRequiredService<IMemoryCache>();
 
         /// <summary>
         /// 系统配置的微信信息
@@ -42,21 +43,21 @@ namespace NetCore.Wechat.Models
         /// <param name="option"></param>
         public WechatHelper(IOptions<WechatModel> option)
         {
-            config = option.Value;         
+            config = option.Value;
         }
 
-      
 
 
 
 
-       /// <summary>
-       /// 获得令牌
-       /// </summary>
-       /// <param name="AppId"></param>
-       /// <param name="AppSecret"></param>
-       /// <returns></returns>
-        public string GetAccess_Token(string AppId=null, string AppSecret=null)
+
+        /// <summary>
+        /// 获得令牌
+        /// </summary>
+        /// <param name="AppId"></param>
+        /// <param name="AppSecret"></param>
+        /// <returns></returns>
+        public string GetAccess_Token(string AppId = null, string AppSecret = null)
         {
             string cacheKey = "access_token";
             string result;
@@ -97,7 +98,7 @@ namespace NetCore.Wechat.Models
                     model.AppId = AppId;
                     model.AppSecret = AppSecret;
                     //生成json
-                    string writejson=JsonConvert.SerializeObject(model);
+                    string writejson = JsonConvert.SerializeObject(model);
 
                     //写入json文件
                     WriteFile(writejson);
@@ -112,7 +113,7 @@ namespace NetCore.Wechat.Models
                     //返回文件中的令牌
                     return file_result.Item1;
                 }
-               
+
             }
             else
             {
@@ -121,6 +122,59 @@ namespace NetCore.Wechat.Models
             }
 
         }
+
+
+
+
+
+        /// <summary>
+        /// 设置微信公众号菜单
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> SetWechatMenu()
+        {
+            //接口请求地址
+            string apiurl = string.Format("https://api.weixin.qq.com/cgi-bin/menu/create?access_token={0}", GetAccess_Token());
+
+            string result = string.Empty;
+
+            //读取菜单文件内容 菜单存放在json文件中
+            string patch = MapPath("wechat_menu.json");
+            string json_menu = File.ReadAllText(patch);
+            
+            //设置提交信息
+            HttpContent content = new StringContent(json_menu);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpClient httpClient = new HttpClient();
+            HttpResponseMessage response = await httpClient.PostAsync(apiurl, content);
+
+            //判断返回状态
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result=await response.Content.ReadAsStringAsync();
+                if (!string.IsNullOrEmpty(result))
+                {
+                    Hashtable ht = JsonConvert.DeserializeObject<Hashtable>(result);
+                    if (ht["errmsg"].Equals("ok"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                //重新请求
+               await SetWechatMenu();
+            }
+            
+            return false;
+        }
+
+
+
+
+
 
 
         /// <summary>
@@ -147,7 +201,7 @@ namespace NetCore.Wechat.Models
                 //string json = sr.ReadToEnd().ToString();
                 //sr.Dispose();
                 //stream.Dispose();
-                string json= File.ReadAllText(patch);
+                string json = File.ReadAllText(patch);
 
                 if (!string.IsNullOrEmpty(json))
                 {
@@ -159,16 +213,17 @@ namespace NetCore.Wechat.Models
                     if (dt.AddSeconds(7000) > DateTime.Now)
                     {
                         //还可使用 未过期
-                        long Seconds = GetTimeSeconds(dt.AddSeconds(7000) ,DateTime.Now);
+                        long Seconds = GetTimeSeconds(dt.AddSeconds(7000), DateTime.Now);
                         result = new Tuple<string, long>(acctoken, Seconds);
                         return result;
                     }
-                    else {
+                    else
+                    {
                         //已过期 不能使用
                         result = new Tuple<string, long>(null, 0);
                         return result;
                     }
-                    
+
                 }
                 else
                 {
@@ -195,7 +250,7 @@ namespace NetCore.Wechat.Models
                     File.Create(patch);
                 }
 
-                File.WriteAllText(patch, content);                            
+                File.WriteAllText(patch, content);
 
                 //FileStream stream = new FileStream(patch, FileMode.Open);
                 //StreamWriter wr = new StreamWriter(stream);
@@ -208,11 +263,11 @@ namespace NetCore.Wechat.Models
             }
             catch (Exception e)
             {
-                throw e;               
+                throw e;
             }
         }
 
-        
+
         /// <summary>
         /// 获得两个时间之间相差的秒数
         /// </summary>
@@ -221,7 +276,7 @@ namespace NetCore.Wechat.Models
         /// <returns></returns>
         public static long GetTimeSeconds(DateTime dt, DateTime dt2)
         {
-            long time1 =dt.Ticks;
+            long time1 = dt.Ticks;
             long time2 = dt2.Ticks;
             long min = (time1 - time2) / 10000000;    //min=90
             return min;
@@ -230,8 +285,8 @@ namespace NetCore.Wechat.Models
         /// <summary>
         /// 获取文件绝对路径
         /// </summary>
-       /// <param name="path">文件路径</param>
-       /// <returns></returns>
+        /// <param name="path">文件路径</param>
+        /// <returns></returns>
         public static string MapPath(string path)
         {
             return IsAbsolute(path) ? path : Path.Combine(_ContentRootPath, path.TrimStart('~', '/').Replace("/", DirectorySeparatorChar));

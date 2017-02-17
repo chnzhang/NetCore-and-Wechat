@@ -11,15 +11,13 @@ using NetCore.Wechat.Models;
 
 namespace NetCore.Wechat.Controllers
 {
-    public class MenuController : Controller
-    {
-        private IMemoryCache _memoryCache;
+    public class MenuController : Controller    {
+    
         private IOptions<WechatModel> option;
 
-        public MenuController(IOptions<WechatModel> options, IMemoryCache memoryCache)
+        public MenuController(IOptions<WechatModel> options)
         {
-            option = options;
-            _memoryCache = memoryCache;
+            option = options;           
         }
 
         // GET: /<controller>/
@@ -28,5 +26,17 @@ namespace NetCore.Wechat.Controllers
             ViewBag.acctoken = new WechatHelper(option).GetAccess_Token();
             return View();
         }
+
+        /// <summary>
+        /// 页面请求设置菜单
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<JsonResult> SetWechatMenu()
+        {
+            bool flag = await new WechatHelper(option).SetWechatMenu();
+            return Json(flag);
+        }
+
     }
 }
