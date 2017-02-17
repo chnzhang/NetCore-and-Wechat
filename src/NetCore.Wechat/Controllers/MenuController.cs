@@ -25,7 +25,7 @@ namespace NetCore.Wechat.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            ViewBag.acctoken = new WechatHelper(option, _memoryCache).GetAccess_Token();
+            ViewBag.acctoken = new WechatHelper(option).GetAccess_Token();
             return View();
         }
     }

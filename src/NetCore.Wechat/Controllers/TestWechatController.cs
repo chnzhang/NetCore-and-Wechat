@@ -17,13 +17,12 @@ namespace NetCore.Wechat.Controllers
 {
     public class TestWechatController : Controller
     {
-        private IMemoryCache _memoryCache;
+      
         private IOptions<WechatModel> option;
 
-        public TestWechatController(IOptions<WechatModel> options, IMemoryCache memoryCache)
+        public TestWechatController(IOptions<WechatModel> options)
         {
-            option = options;
-            _memoryCache = memoryCache;
+            option = options;        
         }
 
       
@@ -37,7 +36,7 @@ namespace NetCore.Wechat.Controllers
         [HttpPost]
         public IActionResult Index(WechatModel model)
         {
-            ViewBag.acctoken = new WechatHelper(option, _memoryCache).GetAccess_Token(model.AppId, model.AppSecret);
+            ViewBag.acctoken = new WechatHelper(option).GetAccess_Token(null, null);// new WechatHelper(option).GetAccess_Token(model.AppId, model.AppSecret);
             return View();
         }
 

@@ -25,18 +25,27 @@ namespace NetCore.Wechat.Models
         /// </summary>
         private static string _ContentRootPath = DI.ServiceProvider.GetRequiredService<IHostingEnvironment>().ContentRootPath;
 
+        /// <summary>
+        /// 缓存对象
+        /// </summary>
+        private IMemoryCache _memoryCache=DI.ServiceProvider.GetRequiredService<IMemoryCache>();
+
+        /// <summary>
+        /// 系统配置的微信信息
+        /// </summary>
+        private WechatModel config;
 
 
-        public WechatHelper(IOptions<WechatModel> option, IMemoryCache memoryCache)
+        /// <summary>
+        /// 注入配置信息,这里本来想通过DI或者什么方法来 解除注入 还没找到方法
+        /// </summary>
+        /// <param name="option"></param>
+        public WechatHelper(IOptions<WechatModel> option)
         {
-            config = option.Value;
-            _memoryCache = memoryCache;
+            config = option.Value;         
         }
 
-        //缓存对象
-        private IMemoryCache _memoryCache;
-        //系统配置的微信信息
-        WechatModel config;
+      
 
 
 
