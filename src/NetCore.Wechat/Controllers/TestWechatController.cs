@@ -36,7 +36,7 @@ namespace NetCore.Wechat.Controllers
         [HttpPost]
         public IActionResult Index(WechatModel model)
         {
-            ViewBag.acctoken = new WechatHelper(option).GetAccess_Token(null, null);// new WechatHelper(option).GetAccess_Token(model.AppId, model.AppSecret);
+            ViewBag.acctoken =  new WechatHelper(option).GetAccess_Token(model.AppId, model.AppSecret);
             return View();
         }
 
